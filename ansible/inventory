@@ -1,0 +1,13 @@
+[vector_tilers]
+192.168.33.2[1:2] 
+
+[elasticsearch]
+192.168.33.30
+
+[kibana]
+192.168.33.40
+
+[lab:children]
+vector_tilers
+elasticsearch
+kibana
