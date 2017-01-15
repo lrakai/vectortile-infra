@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
     # install ansible and necessary packages
     controller.vm.provision "shell", inline: "sudo apt-get install -y ansible sshpass"
     # move inventory out of shared directory (full permissions on Windows causing ansible to interpret it as a dyanmic file) 
-    controller.vm.provision "shell", inline: "sudo cp /vagrant/inventory /home/vagrant/; sudo chmod a-x /home/vagrant/inventory"
+    controller.vm.provision "shell", inline: "sudo cp /vagrant/ansible/inventory /home/vagrant/; sudo chmod a-x /home/vagrant/inventory"
   end
 
   (1..2).each do |i|
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
       vector_tiler.vm.box = "nrel/CentOS-6.5-x86_64"
       vector_tiler.vm.hostname = "vector-tile0#{i}"
       vector_tiler.vm.network "private_network", ip: "192.168.33.2#{i}"
-      vector_tiler.vm.network "forwarded_port", guest: 80, host: 8888
+      vector_tiler.vm.network "forwarded_port", guest: 8080, host: 8888
       vector_tiler.vm.synced_folder "./data", "/data"
 
       vector_tiler.vm.provider "virtualbox" do |v|
@@ -39,6 +39,7 @@ Vagrant.configure(2) do |config|
       vector_tiler.push.define "atlas" do |push|
         push.app = "lmrakai/vector_tiler0s#{i}"
       end
+    end
   end
 
   config.vm.define "elasticsearch" do |elasticsearch|
@@ -75,16 +76,16 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "load_balancer" do |load_balancer|
     load_balancer.vm.box = "nrel/CentOS-6.5-x86_64"
-    load_balancer.vm.hostname = "load_balancer"
+    load_balancer.vm.hostname = "load-balancer"
     load_balancer.vm.network "private_network", ip: "192.168.33.50"
     load_balancer.vm.network "forwarded_port", guest: 80, host: 8080
     
-    kibana.vm.provider "virtualbox" do |v|
+    load_balancer.vm.provider "virtualbox" do |v|
       v.memory = 512
       v.cpus = 1
     end
     
-    kibana.push.define "atlas" do |push|
+    load_balancer.push.define "atlas" do |push|
       push.app = "lmrakai/load_balancer"
     end
   end
