@@ -1,5 +1,7 @@
 ---
 # This playbook runs all the common plays in the deployment
 
+- debug: msg="Populating facts"
+
 - name: Create the hosts file for all machines
   template: src=hosts.j2 dest=/etc/hosts
