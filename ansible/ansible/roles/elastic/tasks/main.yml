@@ -8,3 +8,7 @@
 - name: Add elasticsearch signing key
   shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
   when: ansible_os_family == "Debian"
+
+- name: Install apt https transport
+  apt: name=apt-transport-https state=present
+  when: ansible_os_family == "Debian"

@@ -7,10 +7,6 @@
   when: ansible_os_family == "RedHat"
 
 - name: Prepare elasticsearch repo file
-  apt: name=apt-transport-https state=present
-  when: ansible_os_family == "Debian"
-
-- name: Prepare elasticsearch repo file
   shell: echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
   when: ansible_os_family == "Debian"
 
