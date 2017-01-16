@@ -1,0 +1,4 @@
+---
+
+- name: Restart load_balancing
+  service: name=nginx state=restarted

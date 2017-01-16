@@ -1,2 +1,17 @@
 ---
 # Configure load balancing over the tile servers with nginx
+
+- name: Install nginx
+  yum: name=nginx state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Install nginx
+  apt: name=nginx state=present
+  when: ansible_os_family == "Debian"
+
+- name: Copy nginx configuration
+  template: src=nginx.j2 dest=/usr/local/nginx/conf/
+  notify: Restart load_balancing
+
+- name: Start nginx
+  service: name=nginx enabled=yes state=started
