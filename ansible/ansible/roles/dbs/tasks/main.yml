@@ -2,7 +2,7 @@
 # Configure elasticsearch as the database
 
 - name: Copy elasticsearch yum repo file
-  copy: src=files/elasticsearch.repo
+  copy: src=elasticsearch.repo
         dest=/etc/yum.repos.d/
 
 - name: Install elasticsearch

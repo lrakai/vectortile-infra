@@ -7,3 +7,6 @@ sudo apt-get install -y ansible sshpass
 
 # move inventory out of shared directory (full permissions on Windows causing ansible to interpret it as a dyanmic file) 
 cp -R /vagrant/ansible/. /home/vagrant/
+
+# set up ssh known_hosts
+ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook /home/vagrant/ansible/controller.yml

@@ -1,5 +1,0 @@
----
-# Configure the ansible controller
-
-- name: Update known_hosts
-  known_hosts:

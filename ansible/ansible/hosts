@@ -1,3 +1,5 @@
+localhost ansible_connection=local
+
 [tiling]
 vector_tiler01 ansible_ssh_host=192.168.33.21
 vector_tiler01 ansible_ssh_host=192.168.33.22
