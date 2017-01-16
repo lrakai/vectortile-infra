@@ -1,0 +1,12 @@
+---
+# Configure the tile servers
+
+- name: Install node
+  yum: name=node state=present
+
+- name: Install tile server
+  npm: name=tileserver-gl-light global=yes state=latest
+
+- name: Copy vector tile file
+  copy: src=files/{{ vector_file }}.mbtiles
+        dest=/etc/yum.repos.d/

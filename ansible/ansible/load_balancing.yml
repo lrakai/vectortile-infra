@@ -1,0 +1,8 @@
+---
+# This playbook deploys the load balancers
+
+- hosts: load_balancing
+  sudo: yes
+  gather_facts: no
+  roles:
+    - load_balancing

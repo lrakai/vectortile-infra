@@ -1,0 +1,8 @@
+---
+# This playbook deploys the databases
+
+- hosts: dbs
+  sudo: yes
+  gather_facts: no
+  roles:
+    - dbs

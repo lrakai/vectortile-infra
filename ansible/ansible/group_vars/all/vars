@@ -3,4 +3,3 @@
 # Using default vagrant users for the lab
 ansible_connection: ssh 
 ansible_ssh_user: vagrant 
-ansible_ssh_pass: vagrant

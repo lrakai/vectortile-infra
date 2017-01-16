@@ -1,0 +1,8 @@
+---
+# This playbook deploys the vector tiling site
+
+- include: controller.yml
+- include: tiling.yml
+- include: dbs.yml
+- include: monitoring.yml
+- include: load_balancing.yml
