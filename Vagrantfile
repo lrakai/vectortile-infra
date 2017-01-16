@@ -26,7 +26,6 @@ Vagrant.configure(2) do |config|
       vector_tiler.vm.hostname = "vector-tile0#{i}"
       vector_tiler.vm.network "private_network", ip: "192.168.33.2#{i}"
       vector_tiler.vm.network "forwarded_port", guest: 8080, host: "888#{i}".to_i
-      vector_tiler.vm.synced_folder "./data", "/data"
 
       vector_tiler.vm.provider "virtualbox" do |v|
         v.memory = 1024
