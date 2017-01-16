@@ -17,10 +17,7 @@ Vagrant.configure(2) do |config|
       push.app = "lmrakai/controller"
     end
 
-    # install ansible and necessary packages
-    controller.vm.provision "shell", inline: "sudo apt-get install -y ansible sshpass"
-    # move inventory out of shared directory (full permissions on Windows causing ansible to interpret it as a dyanmic file) 
-    controller.vm.provision "shell", inline: "sudo cp /vagrant/ansible/inventory /home/vagrant/; sudo chmod a-x /home/vagrant/inventory"
+    controller.vm.provision "shell", path: "controller-provision.sh"
   end
 
   (1..2).each do |i|
@@ -28,7 +25,7 @@ Vagrant.configure(2) do |config|
       vector_tiler.vm.box = "nrel/CentOS-6.5-x86_64"
       vector_tiler.vm.hostname = "vector-tile0#{i}"
       vector_tiler.vm.network "private_network", ip: "192.168.33.2#{i}"
-      vector_tiler.vm.network "forwarded_port", guest: 8080, host: 8888
+      vector_tiler.vm.network "forwarded_port", guest: 8080, host: "888#{i}".to_i
       vector_tiler.vm.synced_folder "./data", "/data"
 
       vector_tiler.vm.provider "virtualbox" do |v|
