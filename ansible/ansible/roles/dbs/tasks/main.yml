@@ -1,9 +1,6 @@
 ---
 # Configure elasticsearch as the database
 
-- name: Add elasticsearch signing key
-  command: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-
 - name: Copy elasticsearch yum repo file
   copy: src=files/elasticsearch.repo
         dest=/etc/yum.repos.d/

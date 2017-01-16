@@ -1,0 +1,5 @@
+---
+# Configure elastic.co services
+
+- name: Add elasticsearch signing key
+  command: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
