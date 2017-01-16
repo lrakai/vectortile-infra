@@ -1,12 +1,26 @@
 ---
 # Configure elasticsearch as the database
 
-- name: Copy elasticsearch yum repo file
+- name: Prepare elasticsearch repo file
   copy: src=elasticsearch.repo
         dest=/etc/yum.repos.d/
+  when: ansible_os_family == "RedHat"
+
+- name: Prepare elasticsearch repo file
+  apt: name=apt-transport-https state=present
+  when: ansible_os_family == "Debian"
+
+- name: Prepare elasticsearch repo file
+  shell: echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
+  when: ansible_os_family == "Debian"
 
 - name: Install elasticsearch
   yum: name=elasticsearch state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: Install elasticsearch
+  apt: name=elasticsearch state=latest
+  when: ansible_os_family == "Debian"
 
 - name: Start elasticsearch
   service: name=elasticsearch enabled=yes state=started

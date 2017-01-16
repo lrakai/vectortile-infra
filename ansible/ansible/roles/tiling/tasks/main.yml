@@ -3,6 +3,11 @@
 
 - name: Install node
   yum: name=node state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Install node
+  apt: name=node state=present
+  when: ansible_os_family == "Debian"
 
 - name: Install tile server
   npm: name=tileserver-gl-light global=yes state=latest

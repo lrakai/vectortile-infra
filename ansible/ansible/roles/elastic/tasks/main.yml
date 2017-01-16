@@ -2,4 +2,9 @@
 # Configure elastic.co services
 
 - name: Add elasticsearch signing key
-  command: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  shell: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  when: ansible_os_family == "RedHat"
+
+- name: Add elasticsearch signing key
+  shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+  when: ansible_os_family == "Debian"
