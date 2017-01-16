@@ -2,8 +2,8 @@
 # This playbook deploys the vector tilers
 
 - hosts: tiling
-  sudo: yes
-  gather_facts: no
+  become: true
+  gather_facts: true
   roles:
     - common
     - tiling
