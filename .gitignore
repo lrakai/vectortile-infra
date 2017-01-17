@@ -1,3 +1,3 @@
 .vagrant
-data/*
-!data/nashville_tennessee.mbtiles
+ansible/ansible/roles/tiling/files/*
+!ansible/ansible/roles/tiling/files/nashville_tennessee.mbtiles
