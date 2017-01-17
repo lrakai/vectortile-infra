@@ -1,12 +1,20 @@
 ---
 # Configure the tile servers
 
-- name: Install node
-  yum: name=node state=present
+- name: Add node.js repo (RedHat)
+  shell: curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
   when: ansible_os_family == "RedHat"
 
-- name: Install node
-  apt: name=node state=present
+- name: Add node.js repo (Debian)
+  shell: curl -sL https://deb.nodesource.com/setup_6.x | bash -
+  when: ansible_os_family == "Debian"
+
+- name: Install node (RedHat)
+  yum: name=nodejs state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Install node (Debian)
+  apt: name=nodejs state=present
   when: ansible_os_family == "Debian"
 
 - name: Install tile server
