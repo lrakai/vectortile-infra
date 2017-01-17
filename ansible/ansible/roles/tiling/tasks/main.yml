@@ -22,4 +22,9 @@
 
 - name: Copy vector tile file
   copy: src={{ vector_file }}.mbtiles
-        dest=/etc/yum.repos.d/
+        dest=/data/
+
+- name: Start tile server
+  shell: nohup tileserver-gl-light /data/{{ vector_file }}.mbtiles &
+  async: 100
+  poll: 0
