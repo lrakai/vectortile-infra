@@ -5,7 +5,7 @@ upstream application {
 }
 
 server {  
-  listen  80;
+  listen  {{ port }};
   server_name vector-tiling.org;
 
   location / {

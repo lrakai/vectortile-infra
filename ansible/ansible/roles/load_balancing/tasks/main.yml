@@ -1,11 +1,20 @@
 ---
 # Configure load balancing over the tile servers with nginx
 
-- name: Install nginx
+- name: Prepare nginx repo (RedHat)
+  copy: src=elasticsearch.repo
+        dest=/etc/yum.repos.d/
+  when: ansible_os_family == "RedHat"
+
+- name: Prepare nginx repo (Debian)
+  shell: add-apt-repository ppa:nginx/$nginx
+  when: ansible_os_family == "Debian"
+
+- name: Install nginx (RedHat)
   yum: name=nginx state=present
   when: ansible_os_family == "RedHat"
 
-- name: Install nginx
+- name: Install nginx (Debian)
   apt: name=nginx state=present
   when: ansible_os_family == "Debian"
 
