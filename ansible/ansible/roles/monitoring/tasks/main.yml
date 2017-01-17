@@ -21,6 +21,7 @@
 - name: Prepare kibana configuration file
   copy: src=kibana.yml
         dest=/etc/kibana/
+  notify: Restart monitor
 
 - name: Start kibana
   service: name=kibana enabled=yes state=started

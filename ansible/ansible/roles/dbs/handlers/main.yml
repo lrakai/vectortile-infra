@@ -1,0 +1,4 @@
+---
+
+- name: Restart db
+  service: name=elasticsearch state=restarted

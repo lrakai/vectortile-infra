@@ -1,0 +1,4 @@
+---
+
+- name: Restart monitor
+  service: name=kibana state=restarted

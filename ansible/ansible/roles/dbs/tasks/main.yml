@@ -30,5 +30,10 @@
   copy: src=limits.conf
         dest=/etc/security/
 
+- name: Configure elasticsearch
+  copy: src=elasticsearch.yml
+        dest=/etc/elasticsearch/
+  notify: Restart db
+
 - name: Start elasticsearch
   service: name=elasticsearch enabled=yes state=started
