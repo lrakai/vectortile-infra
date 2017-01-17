@@ -2,7 +2,7 @@
 # Configures known hosts
 
   - name: For each host, scan for its ssh public key
-    shell: "ssh-keyscan {{ item }},`dig +short {{ item }}`"
+    shell: "ssh-keyscan {{ item }}"
     with_items: "{{ ssh_known_hosts }}"
     register: ssh_known_host_results
     ignore_errors: yes
