@@ -24,7 +24,13 @@
   copy: src={{ vector_file }}.mbtiles
         dest=/data/
 
+- name: Install at (RedHat)
+  yum: name=at state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Start atd (RedHat)
+  service: name=atd enabled=yes state=started
+  when: ansible_os_family == "RedHat"
+
 - name: Start tile server
-  shell: nohup tileserver-gl-light /data/{{ vector_file }}.mbtiles &
-  async: 100
-  poll: 0
+  shell: echo "tileserver-gl-light /data/{{ vector_file }}.mbtiles > /dev/null" | at now
