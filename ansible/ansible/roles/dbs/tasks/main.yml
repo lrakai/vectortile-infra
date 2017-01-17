@@ -26,5 +26,9 @@
   apt: name=elasticsearch state=latest
   when: ansible_os_family == "Debian"
 
+- name: Increase number of processes
+  copy: src=limits.conf
+        dest=/etc/security/
+
 - name: Start elasticsearch
   service: name=elasticsearch enabled=yes state=started

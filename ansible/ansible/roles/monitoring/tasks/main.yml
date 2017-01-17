@@ -18,5 +18,9 @@
   apt: name=kibana state=latest
   when: ansible_os_family == "Debian"
 
+- name: Prepare kibana configuration file
+  copy: src=kibana.yml
+        dest=/etc/kibana/
+
 - name: Start kibana
   service: name=kibana enabled=yes state=started
