@@ -3,23 +3,6 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.define "controller", primary: true do |controller|
-    controller.vm.box = "ubuntu/trusty64"
-    controller.vm.hostname = "controller"
-    controller.vm.network "private_network", ip: "192.168.33.10"
-
-    controller.vm.provider "virtualbox" do |v|
-      v.memory = 512
-      v.cpus = 1
-    end
-
-    controller.push.define "atlas" do |push|
-      push.app = "lmrakai/controller"
-    end
-
-    controller.vm.provision "shell", path: "controller-provision.sh"
-  end
-
   (1..2).each do |i|
     config.vm.define "vector_tiler0#{i}" do |vector_tiler|
       vector_tiler.vm.box = "nrel/CentOS-6.5-x86_64"
@@ -84,6 +67,23 @@ Vagrant.configure(2) do |config|
     load_balancer.push.define "atlas" do |push|
       push.app = "lmrakai/load_balancer"
     end
+  end
+
+  config.vm.define "controller", primary: true do |controller|
+    controller.vm.box = "ubuntu/trusty64"
+    controller.vm.hostname = "controller"
+    controller.vm.network "private_network", ip: "192.168.33.10"
+
+    controller.vm.provider "virtualbox" do |v|
+      v.memory = 512
+      v.cpus = 1
+    end
+
+    controller.push.define "atlas" do |push|
+      push.app = "lmrakai/controller"
+    end
+
+    controller.vm.provision "shell", path: "controller-provision.sh"
   end
 
 end
