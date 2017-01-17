@@ -6,4 +6,4 @@ ansible-playbook /home/vagrant/ansible/site.yml
 export ANSIBLE_HOST_KEY_CHECKING=True
 
 # Seed data
-./home/vagrant/seed-data.sh
+/home/vagrant/seed-data.sh
