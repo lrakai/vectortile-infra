@@ -19,7 +19,8 @@
   when: ansible_os_family == "Debian"
 
 - name: Copy nginx configuration
-  template: src=nginx.j2 dest=/usr/local/nginx/conf/
+  template: src=nginx.j2 
+            dest=/etc/nginx/conf.d/default.conf
   notify: Restart load_balancing
 
 - name: Start nginx

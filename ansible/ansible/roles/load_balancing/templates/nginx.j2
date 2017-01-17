@@ -1,6 +1,6 @@
-upstream application { 
+upstream tilers { 
   {% for host in groups['tiling'] %}
-    server {{ host }}
+    server {{ host }}:{{ tile_port }};
   {% endfor %}
 }
 
@@ -12,6 +12,6 @@ server {
     proxy_set_header  Host             $host;
     proxy_set_header  X-Real-IP        $remote_addr;
     proxy_set_header  X-Forwarded-For  $remote_addr;
-    proxy_pass http://application;
+    proxy_pass http://tilers;
   }
 }
