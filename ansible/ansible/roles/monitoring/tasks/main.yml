@@ -1,20 +1,20 @@
 ---
 # Configure kibana as the site monitoring tool
 
-- name: Prepare kibana repo file
+- name: Prepare kibana repo file (RedHat)
   copy: src=kibana.repo
         dest=/etc/yum.repos.d/
   when: ansible_os_family == "RedHat"
 
-- name: Prepare kibana repo file
+- name: Prepare kibana repo file (Debian)
   shell: echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
   when: ansible_os_family == "Debian"
 
-- name: Install kibana
+- name: Install kibana (RedHat)
   yum: name=kibana state=latest
   when: ansible_os_family == "RedHat"
 
-- name: Install kibana
+- name: Install kibana (Debian)
   apt: name=kibana state=latest
   when: ansible_os_family == "Debian"
 

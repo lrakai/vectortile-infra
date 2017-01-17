@@ -1,14 +1,14 @@
 ---
 # Configure elastic.co services
 
-- name: Add elasticsearch signing key
+- name: Add elasticsearch signing key (RedHat)
   shell: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
   when: ansible_os_family == "RedHat"
 
-- name: Add elasticsearch signing key
+- name: Add elasticsearch signing key (Debian)
   shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
   when: ansible_os_family == "Debian"
 
-- name: Install apt https transport
+- name: Install apt https transport (Debian)
   apt: name=apt-transport-https state=present
   when: ansible_os_family == "Debian"
