@@ -21,35 +21,35 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "elasticsearch" do |elasticsearch|
-    elasticsearch.vm.box = "nrel/CentOS-6.5-x86_64"
-    elasticsearch.vm.hostname = "elasticsearch"
-    elasticsearch.vm.network "private_network", ip: "192.168.33.30"
-    elasticsearch.vm.network "forwarded_port", guest: 9200, host: 9292
+  config.vm.define "db" do |db|
+    db.vm.box = "nrel/CentOS-6.5-x86_64"
+    db.vm.hostname = "db"
+    db.vm.network "private_network", ip: "192.168.33.30"
+    db.vm.network "forwarded_port", guest: 9200, host: 9292
 
-    elasticsearch.vm.provider "virtualbox" do |v|
+    db.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
     
-    elasticsearch.push.define "atlas" do |push|
-      push.app = "lmrakai/elasticsearch"
+    db.push.define "atlas" do |push|
+      push.app = "lmrakai/db"
     end
   end
 
-  config.vm.define "kibana" do |kibana|
-    kibana.vm.box = "nrel/CentOS-6.5-x86_64"
-    kibana.vm.hostname = "kibana"
-    kibana.vm.network "private_network", ip: "192.168.33.40"
-    kibana.vm.network "forwarded_port", guest: 5601, host: 15601
+  config.vm.define "monitor" do |monitor|
+    monitor.vm.box = "nrel/CentOS-6.5-x86_64"
+    monitor.vm.hostname = "monitor"
+    monitor.vm.network "private_network", ip: "192.168.33.40"
+    monitor.vm.network "forwarded_port", guest: 5601, host: 15601
     
-    kibana.vm.provider "virtualbox" do |v|
+    monitor.vm.provider "virtualbox" do |v|
       v.memory = 512
       v.cpus = 1
     end
     
-    kibana.push.define "atlas" do |push|
-      push.app = "lmrakai/kibana"
+    monitor.push.define "atlas" do |push|
+      push.app = "lmrakai/monitor"
     end
   end
 
