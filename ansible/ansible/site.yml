@@ -1,6 +1,7 @@
 ---
 # This playbook deploys the vector tiling site
 
+- include: common.yml
 - include: controller.yml
 - include: tiling.yml
 - include: dbs.yml

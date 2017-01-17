@@ -5,5 +5,4 @@
   become: true
   gather_facts: true
   roles:
-    - common
     - tiling
