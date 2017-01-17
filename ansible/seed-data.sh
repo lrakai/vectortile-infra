@@ -8,14 +8,14 @@ TYPE=activity
 curl -X PUT $DB/$INDEX -d '
 {
     "mappings": {
-        '''$TYPE''': {
+        "'"$TYPE"'": {
             "properties": {
                 "level": {
                     "type": "string",
                     "index": "not_analyzed" 
                 },
                 "location": {
-                    "type": geo_point
+                    "type": "geo_point"
                 }
             }
         }
@@ -25,17 +25,17 @@ curl -X PUT $DB/$INDEX -d '
 curl -X PUT $DB/$INDEX/$TYPE/1 -d '
 {
   "level": "severe",
-  "location": [ 86.78163, 36.16277 ] 
+  "location": [ -86.78163, 36.16277 ] 
 }'
 
 curl -X PUT $DB/$INDEX/$TYPE/2 -d '
 {
   "level": "severe",
-  "location": [ 86.781683, 36.16281 ] 
+  "location": [ -86.781683, 36.16281 ] 
 }'
 
 curl -X PUT $DB/$INDEX/$TYPE/2 -d '
 {
   "level": "severe",
-  "location": [ 86.78170, 36.16271 ] 
+  "location": [ -86.78170, 36.16271 ] 
 }'
