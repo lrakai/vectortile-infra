@@ -2,7 +2,7 @@
 # Configure load balancing over the tile servers with nginx
 
 - name: Prepare nginx repo (RedHat)
-  copy: src=elasticsearch.repo
+  copy: src=nginx.repo
         dest=/etc/yum.repos.d/
   when: ansible_os_family == "RedHat"
 
