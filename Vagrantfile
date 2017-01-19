@@ -14,10 +14,6 @@ Vagrant.configure(2) do |config|
         v.memory = 1024
         v.cpus = 1
       end
-      
-      vector_tiler.push.define "atlas" do |push|
-        push.app = "lmrakai/vector_tiler0s#{i}"
-      end
     end
   end
 
@@ -31,10 +27,6 @@ Vagrant.configure(2) do |config|
       v.memory = 1024
       v.cpus = 1
     end
-    
-    db.push.define "atlas" do |push|
-      push.app = "lmrakai/db"
-    end
   end
 
   config.vm.define "monitor" do |monitor|
@@ -46,10 +38,6 @@ Vagrant.configure(2) do |config|
     monitor.vm.provider "virtualbox" do |v|
       v.memory = 512
       v.cpus = 1
-    end
-    
-    monitor.push.define "atlas" do |push|
-      push.app = "lmrakai/monitor"
     end
   end
 
@@ -63,10 +51,6 @@ Vagrant.configure(2) do |config|
       v.memory = 512
       v.cpus = 1
     end
-    
-    load_balancer.push.define "atlas" do |push|
-      push.app = "lmrakai/load_balancer"
-    end
   end
 
   config.vm.define "controller", primary: true do |controller|
@@ -78,12 +62,10 @@ Vagrant.configure(2) do |config|
       v.memory = 512
       v.cpus = 1
     end
-
-    controller.push.define "atlas" do |push|
-      push.app = "lmrakai/controller"
-    end
-
     controller.vm.provision "shell", path: "controller-provision.sh"
   end
 
+  config.push.define "atlas" do |push|
+    push.app = "lmrakai/vector_tiler"
+  end
 end
