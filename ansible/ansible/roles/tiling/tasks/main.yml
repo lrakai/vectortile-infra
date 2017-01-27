@@ -18,7 +18,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Install tile server
-  npm: name=tileserver-gl-light global=yes state=latest
+  npm: name=tileserver-gl-light global=yes state=latest version=1.3.2
 
 - name: Copy vector tile file
   copy: src={{ vector_file }}.mbtiles
