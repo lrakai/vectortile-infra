@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
     load_balancer.vm.box = "nrel/CentOS-6.5-x86_64"
     load_balancer.vm.hostname = "load-balancer"
     load_balancer.vm.network "private_network", ip: "192.168.33.50"
-    load_balancer.vm.network "forwarded_port", guest: 80, host: 8080
+    load_balancer.vm.network "forwarded_port", guest: 8080, host: 8080
     
     load_balancer.vm.provider "virtualbox" do |v|
       v.memory = 512
