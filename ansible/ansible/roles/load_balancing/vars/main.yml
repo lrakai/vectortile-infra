@@ -1,4 +1,5 @@
 ---
 
-port: 80
+server_port: 8080
 tile_port: 8080
+site: vector-tiling.org
