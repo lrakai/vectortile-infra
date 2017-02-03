@@ -1,0 +1,28 @@
+{
+  "options": {
+    "paths": {
+      "root": "/hosting",
+      "fonts": "fonts",
+      "sprites": "sprites",
+      "styles": "styles",
+      "mbtiles": "data"
+    },
+    "domains": [
+      "localhost:8080",
+      "127.0.0.1:8080"
+    ],
+    "maxSize": 2048
+  },
+  "styles": {
+    "kibana": {
+      "style": "kibana.json",
+      "serve_data": true,
+      "serve_rendered": false
+    }
+  },
+  "data": {
+    "nashville-vector": {
+      "mbtiles": "nashville_tennessee.mbtiles"
+    }
+  }
+}
