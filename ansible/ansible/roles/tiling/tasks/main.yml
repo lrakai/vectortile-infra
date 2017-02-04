@@ -20,9 +20,13 @@
 - name: Install tile server
   npm: name=tileserver-gl-light global=yes state=latest version=1.3.2
 
-- name: Copy vector tile file
-  copy: src={{ vector_file }}.mbtiles
-        dest=/data/
+- name: Copy vector tile files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: '{{ vector_file }}.mbtiles', dest: '/hosting/data/' }
+    - { src: 'kibana.json', dest: '/hosting/styles/' }
+    - { src: 'config.json', dest: '/hosting/config/' }
+    - { src: 'Open Sans Regular', dest: '/hosting/fonts/' }
 
 - name: Install at (RedHat)
   yum: name=at state=present
@@ -33,4 +37,4 @@
   when: ansible_os_family == "RedHat"
 
 - name: Start tile server
-  shell: echo "tileserver-gl-light /data/{{ vector_file }}.mbtiles > /dev/null" | at now
+  shell: echo "tileserver-gl-light --config /hosting/config/config.json > /dev/null" | at now
