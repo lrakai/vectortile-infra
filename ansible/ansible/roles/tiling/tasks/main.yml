@@ -27,6 +27,7 @@
     - { src: 'kibana.json', dest: '/hosting/styles/' }
     - { src: 'config.json', dest: '/hosting/config/' }
     - { src: 'Open Sans Regular', dest: '/hosting/fonts/' }
+  notify: Restart tilers
 
 - name: Install at (RedHat)
   yum: name=at state=present

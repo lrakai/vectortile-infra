@@ -1,0 +1,6 @@
+---
+
+- name: Restart tilers
+  shell: |
+    ps -ef | grep tile | grep node | sudo kill `awk '{print $2}'`
+    echo "tileserver-gl-light --config /hosting/config/config.json > /dev/null" | at now
