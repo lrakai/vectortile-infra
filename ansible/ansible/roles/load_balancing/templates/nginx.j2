@@ -5,7 +5,7 @@ upstream tilers {
 }
 
 server {  
-  listen  {{ server_port }} ssl;
+  listen {{ server_port }} ssl;
   server_name {{ site }};
 
   ssl on;
