@@ -1,1 +1,2 @@
 network.host: _eth1_
+bootstrap.system_call_filter: false
