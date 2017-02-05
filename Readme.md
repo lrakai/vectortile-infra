@@ -3,8 +3,12 @@ Lab environment serving load-balanced vector tiles for use in kibana map visuali
 Vagrant is the environment controller using VirtualBox.
 Ansible is used for configuration management.
 
-# Example
-![The vector map in Kibana](images/kibana.png)
+# Raster/Vector Map Comparison
+## Official Kibana Raster Tile Map
+![The official raster map in Kibana](images/kibana-raster.gif)
+
+## Vector Map Served by vectortile-infra
+![The vector map in Kibana](images/kibana-vector.gif)
 
 # Usage
 ```
