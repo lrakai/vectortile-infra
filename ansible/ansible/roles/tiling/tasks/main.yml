@@ -24,10 +24,12 @@
   copy: src={{ item.src }} dest={{ item.dest }}
   with_items:
     - { src: '{{ vector_file }}.mbtiles', dest: '/hosting/data/' }
-    - { src: 'kibana.json', dest: '/hosting/styles/' }
+    - { src: 'style.json', dest: '/hosting/styles/' }
+    - { src: 'sprite.json', dest: '/hosting/styles/kibana.json' }
+    - { src: 'sprite.png', dest: '/hosting/styles/kibana.png' }
     - { src: 'config.json', dest: '/hosting/config/' }
     - { src: 'Open Sans Regular', dest: '/hosting/fonts/' }
-  notify: Restart tilers
+  notify: Restart tilers (step 1)
 
 - name: Install at (RedHat)
   yum: name=at state=present

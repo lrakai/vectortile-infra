@@ -1,6 +1,11 @@
 ---
 
-- name: Restart tilers
-  shell: |
-    ps -ef | grep tile | grep node | sudo kill `awk '{print $2}'`
-    echo "tileserver-gl-light --config /hosting/config/config.json > /dev/null" | at now
+- name: Restart tilers (step 1)
+  shell: ps -ef | grep tileserver-gl-light | grep node | kill `awk '{print $2}'`
+  register: result
+  failed_when: "'Never' in result.stderr"
+  notify: 
+    - Restart tilers (step 2)
+
+- name: Restart tilers (step 2)
+  shell: echo "tileserver-gl-light --config /hosting/config/config.json > /dev/null" | at now

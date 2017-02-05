@@ -48,7 +48,7 @@
       "url": "https://localhost:8080/data/nashville-vector.json?style=kibana"
     }
   },
-  "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
+  "sprite": "{styleJsonFolder}/kibana",
   "glyphs": "https://localhost:8080/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {

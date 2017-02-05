@@ -15,7 +15,7 @@
   },
   "styles": {
     "kibana": {
-      "style": "kibana.json",
+      "style": "style.json",
       "serve_data": true,
       "serve_rendered": false
     }
