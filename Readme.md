@@ -6,6 +6,7 @@ Ansible is used for configuration management.
 # Raster/Vector Map Comparison
 ## Official Kibana Raster Tile Map
 Currently limited to 8 resolutions.
+
 ![The official raster map in Kibana](images/kibana-raster.gif)
 
 ## Vector Map Served by vectortile-infra
