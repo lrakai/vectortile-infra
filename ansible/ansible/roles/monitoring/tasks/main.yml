@@ -40,12 +40,12 @@
     version: 5.2-vector-map
 
 - name: Install kibana packages
-  npm: path={{ src_path}} production=yes
+  shell: "cd {{ src_path }} && sudo npm install --production || true"
 
 - name: Prepare kibana configuration file
-  template: src=kibana.j2
+  copy: src=kibana.yml
         dest={{ src_path }}/config
   notify: Restart monitor (step 1)
 
 - name: Start kibana
-  shell: echo "bash {{ src_path }}/bin/kibana > /dev/null" | at now
+  shell: echo "sudo bash {{ src_path }}/bin/kibana > /dev/null" | at now

@@ -8,4 +8,4 @@
     - Restart monitor (step 2)
 
 - name: Restart monitor (step 2)
-  shell:  echo "bash {{ src_path }}/kibana/bin/kibana > /dev/null" | at now
+  shell: echo "sudo bash {{ src_path }}/bin/kibana > /dev/null" | at now
