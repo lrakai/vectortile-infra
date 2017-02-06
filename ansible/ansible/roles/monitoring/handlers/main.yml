@@ -1,4 +1,11 @@
 ---
 
-- name: Restart monitor
-  service: name=kibana state=restarted
+- name: Restart monitor (step 1)
+  shell: ps -ef | grep kibana | grep bash | kill `awk '{print $2}'`
+  register: result
+  failed_when: "'Never' in result.stderr"
+  notify: 
+    - Restart monitor (step 2)
+
+- name: Restart monitor (step 2)
+  shell:  echo "bash {{ src_path }}/kibana/bin/kibana > /dev/null" | at now

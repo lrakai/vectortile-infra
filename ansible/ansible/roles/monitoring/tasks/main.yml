@@ -1,27 +1,51 @@
 ---
 # Configure kibana as the site monitoring tool
 
-- name: Prepare kibana repo file (RedHat)
-  copy: src=kibana.repo
-        dest=/etc/yum.repos.d/
+- name: Add node.js repo (RedHat)
+  shell: curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
   when: ansible_os_family == "RedHat"
 
-- name: Prepare kibana repo file (Debian)
-  shell: echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
+- name: Add node.js repo (Debian)
+  shell: curl -sL https://deb.nodesource.com/setup_6.x | bash -
   when: ansible_os_family == "Debian"
 
-- name: Install kibana (RedHat)
-  yum: name=kibana state=latest
+- name: Install node (RedHat)
+  yum: name=nodejs state=present
   when: ansible_os_family == "RedHat"
 
-- name: Install kibana (Debian)
-  apt: name=kibana state=latest
+- name: Install node (Debian)
+  apt: name=nodejs state=present
   when: ansible_os_family == "Debian"
+
+- name: Install git (RedHat)
+  yum: name=git state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: Install git (Debian)
+  apt: name=git state=latest
+  when: ansible_os_family == "Debian"
+
+- name: Install at (RedHat)
+  yum: name=at state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Start atd (RedHat)
+  service: name=atd enabled=yes state=started
+  when: ansible_os_family == "RedHat"
+
+- name: Clone git repo
+  git: 
+    repo: https://github.com/lrakai/kibana.git
+    dest: "{{ src_path }}"
+    version: 5.2-vector-map
+
+- name: Install kibana packages
+  npm: path={{ src_path}} production=yes
 
 - name: Prepare kibana configuration file
-  copy: src=kibana.yml
-        dest=/etc/kibana/
-  notify: Restart monitor
+  template: src=kibana.j2
+        dest={{ src_path }}/config
+  notify: Restart monitor (step 1)
 
 - name: Start kibana
-  service: name=kibana enabled=yes state=started
+  shell: echo "bash {{ src_path }}/bin/kibana > /dev/null" | at now
